@@ -9,6 +9,8 @@ let num1;
 let num2;
 let operator;
 let operationButtonPressed = false;
+let secondNumEntered = false;
+let chaining = false;
 
 
 const add = (a, b) => +a + +b;
@@ -40,13 +42,30 @@ const updateDisplay = function () {
 const clearDisplay = function () {
     displayValue = "";
     updateDisplay();
-}
+};
+
+const giveResult = function (event) {
+    num2 = displayValue;
+    operationButtonPressed = false;
+    
+    displayValue = operate(operator, num1, num2);
+    if (chaining) {
+        upperValue = displayValue;
+    }
+    else {
+        upperValue += " " + num2 + " = ";
+    }
+    
+    chaining = false;
+    updateDisplay();
+};
 
 
 numButtons.forEach(btn => btn.addEventListener("click", event => {
     if (operationButtonPressed) {
         upperValue = displayValue;
         clearDisplay();
+        secondNumEntered = true;
     }
 
     let num = event.target.textContent;
@@ -55,6 +74,11 @@ numButtons.forEach(btn => btn.addEventListener("click", event => {
 }));
 
 operateButtons.forEach(btn => btn.addEventListener("click", event => {
+    if (secondNumEntered) {
+        chaining = true;
+        giveResult(event);
+    }
+
     num1 = displayValue;
     operator = event.target.textContent;
 
@@ -63,11 +87,4 @@ operateButtons.forEach(btn => btn.addEventListener("click", event => {
     updateDisplay();
 }));
 
-equalButton.addEventListener("click", event => {
-    num2 = displayValue;
-    upperValue += " " + num2;
-    operationButtonPressed = false;
-
-    displayValue = operate(operator, num1, num2);
-    updateDisplay();
-})
+equalButton.addEventListener("click", giveResult);
