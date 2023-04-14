@@ -45,9 +45,15 @@ const clearDisplay = function () {
 };
 
 const giveResult = function (event) {
-    num2 = displayValue;
-    operationButtonPressed = false;
+    if (secondNumEntered) num2 = displayValue;
     
+    if ((!num1 || !num2) && !chaining) {
+        alert("Don't press the = button before entering both numbers!");
+        return;
+    }
+    
+    operationButtonPressed = false;
+
     displayValue = operate(operator, num1, num2);
     if (chaining) {
         upperValue = displayValue;
@@ -56,7 +62,11 @@ const giveResult = function (event) {
         upperValue += " " + num2 + " = ";
     }
     
+    num1 = undefined;
+    num2 = undefined;
+    
     chaining = false;
+    secondNumEntered = false;
     updateDisplay();
 };
 
@@ -77,6 +87,7 @@ operateButtons.forEach(btn => btn.addEventListener("click", event => {
     if (secondNumEntered) {
         chaining = true;
         giveResult(event);
+        secondNumEntered = false;
     }
 
     num1 = displayValue;
