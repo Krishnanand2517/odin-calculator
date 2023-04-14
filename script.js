@@ -2,6 +2,7 @@ const calcDisplay = document.querySelector(".calc-display");
 const upperDisplay = document.querySelector(".upper-display");
 const equalButton = document.querySelector(".equal");
 const clearButton = document.querySelector(".clear");
+const pointButton = document.querySelector(".point");
 const numButtons = document.querySelectorAll(".digit");
 const operateButtons = document.querySelectorAll(".operation");
 let displayValue = "";
@@ -11,6 +12,7 @@ let num2;
 let operator;
 let operationButtonPressed = false;
 let secondNumEntered = false;
+let pointPresent = false;
 let chaining = false;
 
 
@@ -93,13 +95,16 @@ const giveResult = function (event) {
 
 numButtons.forEach(btn => btn.addEventListener("click", event => {
     if (operationButtonPressed) {
+        operationButtonPressed = false;
         upperValue = displayValue;
         clearDisplay();
         secondNumEntered = true;
     }
 
+    
     let num = event.target.textContent;
     displayValue += num;
+
     updateDisplay();
 }));
 
@@ -121,3 +126,15 @@ operateButtons.forEach(btn => btn.addEventListener("click", event => {
 equalButton.addEventListener("click", giveResult);
 
 clearButton.addEventListener("click", reset);
+
+pointButton.addEventListener("click", event => {
+    if (displayValue == Math.round(displayValue)) {
+        pointPresent = false;
+    }
+    
+    if (pointPresent) return;
+
+    pointPresent = true;
+    displayValue += event.target.textContent;
+    updateDisplay();
+})
