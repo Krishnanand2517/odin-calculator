@@ -3,6 +3,7 @@ const upperDisplay = document.querySelector(".upper-display");
 const equalButton = document.querySelector(".equal");
 const clearButton = document.querySelector(".clear");
 const pointButton = document.querySelector(".point");
+const backButton = document.querySelector(".back");
 const numButtons = document.querySelectorAll(".digit");
 const operateButtons = document.querySelectorAll(".operation");
 let displayValue = "";
@@ -48,7 +49,7 @@ const clearDisplay = function () {
 };
 
 const reset = function () {
-    displayValue = "000";
+    displayValue = "0";
     upperValue = "---";
     num1 = undefined;
     num2 = undefined;
@@ -131,10 +132,19 @@ pointButton.addEventListener("click", event => {
     if (displayValue == Math.round(displayValue)) {
         pointPresent = false;
     }
-    
+
     if (pointPresent) return;
 
     pointPresent = true;
     displayValue += event.target.textContent;
     updateDisplay();
-})
+});
+
+backButton.addEventListener("click", event => {
+    displayValue = displayValue.toString();
+    displayValue = displayValue.slice(0, displayValue.length - 1);
+    
+    if (displayValue == "") displayValue = "0";
+    displayValue = parseFloat(displayValue);
+    updateDisplay();
+});
