@@ -48,9 +48,9 @@ const clearDisplay = function () {
 const reset = function () {
     displayValue = "000";
     upperValue = "---";
-    num1;
-    num2;
-    operator;
+    num1 = undefined;
+    num2 = undefined;
+    operator = undefined;
     operationButtonPressed = false;
     secondNumEntered = false;
     chaining = false;
@@ -69,6 +69,12 @@ const giveResult = function (event) {
     operationButtonPressed = false;
 
     displayValue = operate(operator, num1, num2).toFixed(6);
+    if (displayValue === "Infinity") {
+        alert("For the sake of humanity, DON'T try to divide by zero! Please!!");
+        displayValue = "0";
+        return;
+    }
+
     if (chaining) {
         upperValue = displayValue;
     }
