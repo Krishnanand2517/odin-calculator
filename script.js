@@ -1,8 +1,9 @@
 const calcDisplay = document.querySelector(".calc-display");
 const upperDisplay = document.querySelector(".upper-display");
+const equalButton = document.querySelector(".equal");
+const clearButton = document.querySelector(".clear");
 const numButtons = document.querySelectorAll(".digit");
 const operateButtons = document.querySelectorAll(".operation");
-const equalButton = document.querySelector(".equal");
 let displayValue = "";
 let upperValue = "---";
 let num1;
@@ -43,6 +44,19 @@ const clearDisplay = function () {
     displayValue = "";
     updateDisplay();
 };
+
+const reset = function () {
+    displayValue = "000";
+    upperValue = "---";
+    num1;
+    num2;
+    operator;
+    operationButtonPressed = false;
+    secondNumEntered = false;
+    chaining = false;
+
+    updateDisplay();
+}
 
 const giveResult = function (event) {
     if (secondNumEntered) num2 = displayValue;
@@ -99,3 +113,5 @@ operateButtons.forEach(btn => btn.addEventListener("click", event => {
 }));
 
 equalButton.addEventListener("click", giveResult);
+
+clearButton.addEventListener("click", reset);
