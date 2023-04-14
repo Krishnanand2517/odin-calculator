@@ -54,7 +54,7 @@ const giveResult = function (event) {
     
     operationButtonPressed = false;
 
-    displayValue = operate(operator, num1, num2);
+    displayValue = operate(operator, num1, num2).toFixed(6);
     if (chaining) {
         upperValue = displayValue;
     }
