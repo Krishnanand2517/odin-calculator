@@ -1,8 +1,10 @@
 const calcDisplay = document.querySelector(".calc-display");
+const upperDisplay = document.querySelector(".upper-display");
 const numButtons = document.querySelectorAll(".digit");
 const operateButtons = document.querySelectorAll(".operation");
 const equalButton = document.querySelector(".equal");
 let displayValue = "";
+let upperValue = "---";
 let num1;
 let num2;
 let operator;
@@ -32,6 +34,7 @@ const operate = function (operator, a, b) {
 
 const updateDisplay = function () {
     calcDisplay.textContent = displayValue;
+    upperDisplay.textContent = upperValue;
 };
 
 const clearDisplay = function () {
@@ -42,6 +45,7 @@ const clearDisplay = function () {
 
 numButtons.forEach(btn => btn.addEventListener("click", event => {
     if (operationButtonPressed) {
+        upperValue = displayValue;
         clearDisplay();
     }
 
@@ -61,6 +65,7 @@ operateButtons.forEach(btn => btn.addEventListener("click", event => {
 
 equalButton.addEventListener("click", event => {
     num2 = displayValue;
+    upperValue += " " + num2;
     operationButtonPressed = false;
 
     displayValue = operate(operator, num1, num2);
