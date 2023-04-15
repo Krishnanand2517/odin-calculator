@@ -158,6 +158,7 @@ const handleKeyboardInput = function (event) {
     else if (event.key == "Backspace") backspace();
     else if (event.key == "Control") reset();
     else if (event.key == "+" || event.key == "-" || event.key == "*" || event.key == "/") appendOperator(event.key);
+    else if (event.key == "Enter") giveResult();
 
     updateDisplay();
 };
