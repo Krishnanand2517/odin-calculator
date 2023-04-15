@@ -39,10 +39,13 @@ const operate = function (operator, a, b) {
 };
 
 const updateDisplay = function () {
+    if (displayValue == "") displayValue = "0";
+
     calcDisplay.textContent = displayValue;
     upperDisplay.textContent = upperValue;
 
     if (displayValue == "0") displayValue = "";
+    // displayValue = displayValue.toString();
 };
 
 const clearDisplay = function () {
@@ -89,6 +92,14 @@ const appendPointer = function () {
     updateDisplay();
 };
 
+const backspace = function () {
+    displayValue = displayValue.toString();
+    displayValue = displayValue.slice(0, displayValue.length - 1);
+    
+    // displayValue = parseFloat(displayValue);
+    updateDisplay();
+};
+
 const giveResult = function (event) {
     if (secondNumEntered) num2 = displayValue;
     
@@ -124,6 +135,8 @@ const giveResult = function (event) {
 const handleKeyboardInput = function (event) {
     if (event.key >= "0" && event.key <= "9") appendNumber(event.key);
     else if (event.key == ".") appendPointer();
+    else if (event.key == "Backspace") backspace();
+    else if (event.key == "Control") reset();
 
     updateDisplay();
 };
@@ -152,13 +165,6 @@ clearButton.addEventListener("click", reset);
 
 pointButton.addEventListener("click", appendPointer);
 
-backButton.addEventListener("click", event => {
-    displayValue = displayValue.toString();
-    displayValue = displayValue.slice(0, displayValue.length - 1);
-    
-    if (displayValue == "") displayValue = "0";
-    displayValue = parseFloat(displayValue);
-    updateDisplay();
-});
+backButton.addEventListener("click", backspace);
 
 window.addEventListener("keydown", handleKeyboardInput);
