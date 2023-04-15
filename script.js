@@ -77,6 +77,18 @@ const appendNumber = function (value) {
     updateDisplay();
 }
 
+const appendPointer = function () {
+    if (!displayValue.includes(".")) {
+        pointPresent = false;
+    }
+
+    if (pointPresent) return;
+
+    pointPresent = true;
+    displayValue += ".";
+    updateDisplay();
+};
+
 const giveResult = function (event) {
     if (secondNumEntered) num2 = displayValue;
     
@@ -111,6 +123,7 @@ const giveResult = function (event) {
 
 const handleKeyboardInput = function (event) {
     if (event.key >= "0" && event.key <= "9") appendNumber(event.key);
+    else if (event.key == ".") appendPointer();
 
     updateDisplay();
 };
@@ -137,17 +150,7 @@ equalButton.addEventListener("click", giveResult);
 
 clearButton.addEventListener("click", reset);
 
-pointButton.addEventListener("click", event => {
-    if (displayValue == Math.round(displayValue)) {
-        pointPresent = false;
-    }
-
-    if (pointPresent) return;
-
-    pointPresent = true;
-    displayValue += event.target.textContent;
-    updateDisplay();
-});
+pointButton.addEventListener("click", appendPointer);
 
 backButton.addEventListener("click", event => {
     displayValue = displayValue.toString();
