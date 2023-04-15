@@ -6,6 +6,9 @@ const pointButton = document.querySelector(".point");
 const backButton = document.querySelector(".back");
 const numButtons = document.querySelectorAll(".digit");
 const operateButtons = document.querySelectorAll(".operation");
+
+const allButtons = document.querySelectorAll("button");
+
 let displayValue = "";
 let upperValue = "";
 let num1;
@@ -94,7 +97,7 @@ const appendPointer = function () {
 
 const appendOperator = function (value) {
     if (value == "*") value = "x";
-    
+
     if (secondNumEntered) {
         chaining = true;
         giveResult();
@@ -171,5 +174,7 @@ clearButton.addEventListener("click", reset);
 pointButton.addEventListener("click", appendPointer);
 
 backButton.addEventListener("click", backspace);
+
+allButtons.forEach(btn => btn.addEventListener("click", event => { btn.blur() }));
 
 window.addEventListener("keydown", handleKeyboardInput);
