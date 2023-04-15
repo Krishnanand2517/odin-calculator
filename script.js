@@ -96,6 +96,8 @@ const appendPointer = function () {
 };
 
 const appendOperator = function (value) {
+    if (operationButtonPressed) return;
+    
     if (value == "*") value = "x";
 
     if (secondNumEntered) {
