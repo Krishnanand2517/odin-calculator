@@ -41,7 +41,7 @@ const operate = function (operator, a, b) {
 const updateDisplay = function () {
     calcDisplay.textContent = displayValue;
     upperDisplay.textContent = upperValue;
-    
+
     if (displayValue == "0") displayValue = "";
 };
 
@@ -59,6 +59,20 @@ const reset = function () {
     operationButtonPressed = false;
     secondNumEntered = false;
     chaining = false;
+
+    updateDisplay();
+}
+
+const appendNumber = function (value) {
+    if (operationButtonPressed) {
+        operationButtonPressed = false;
+        upperValue = displayValue;
+        clearDisplay();
+        secondNumEntered = true;
+    }
+    
+    let num = value;
+    displayValue += num;
 
     updateDisplay();
 }
@@ -95,21 +109,14 @@ const giveResult = function (event) {
     updateDisplay();
 };
 
-
-numButtons.forEach(btn => btn.addEventListener("click", event => {
-    if (operationButtonPressed) {
-        operationButtonPressed = false;
-        upperValue = displayValue;
-        clearDisplay();
-        secondNumEntered = true;
-    }
-
-    
-    let num = event.target.textContent;
-    displayValue += num;
+const handleKeyboardInput = function (event) {
+    if (event.key >= "0" && event.key <= "9") appendNumber(event.key);
 
     updateDisplay();
-}));
+};
+
+
+numButtons.forEach(btn => btn.addEventListener("click", event => appendNumber(event.target.textContent)));
 
 operateButtons.forEach(btn => btn.addEventListener("click", event => {
     if (secondNumEntered) {
@@ -150,3 +157,5 @@ backButton.addEventListener("click", event => {
     displayValue = parseFloat(displayValue);
     updateDisplay();
 });
+
+window.addEventListener("keydown", handleKeyboardInput);
