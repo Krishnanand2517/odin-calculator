@@ -9,36 +9,49 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="upper-display">
-        ---
-    </div>
-    <div class="calc-display">
-        0
-    </div>
+    <div class="calculator-container">
+        <div class="display-section">
+            <div class="upper-display">
+                
+            </div>
+            <div class="calc-display">
+                0
+            </div>
+        </div>
 
-    <button class="clear"> CLEAR </button>
-    <button class="back"> Backspace </button>
-    <br>
-    <button class="digit">7</button>
-    <button class="digit">8</button>
-    <button class="digit">9</button>
-    <br>
-    <button class="digit">4</button>
-    <button class="digit">5</button>
-    <button class="digit">6</button>
-    <br>
-    <button class="digit">1</button>
-    <button class="digit">2</button>
-    <button class="digit">3</button>
-    <br>
-    <button class="point">.</button>
-    <button class="digit">0</button>
-    <br>
-    <button class="operation">+</button>
-    <button class="operation">-</button>
-    <button class="operation">*</button>
-    <button class="operation">/</button>
-    <br>
-    <button class="equal">=</button>
+        <div class="keys-section">
+            <div class="control-btns">
+                <button class="clear"> CLEAR </button>
+                <button class="back"> DELETE </button>
+            </div>
+
+            <div class="key-btns">
+                <div class="left-section">
+                    <button class="digit">7</button>
+                    <button class="digit">8</button>
+                    <button class="digit">9</button>
+                    <br>
+                    <button class="digit">4</button>
+                    <button class="digit">5</button>
+                    <button class="digit">6</button>
+                    <br>
+                    <button class="digit">1</button>
+                    <button class="digit">2</button>
+                    <button class="digit">3</button>
+                    <br>
+                    <button class="digit">0</button>
+                    <button class="point">.</button>
+                    <button class="equal">=</button>
+                </div>
+        
+                <div class="right-section">
+                    <button class="operation">+</button>
+                    <button class="operation">-</button>
+                    <button class="operation">x</button>
+                    <button class="operation">/</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

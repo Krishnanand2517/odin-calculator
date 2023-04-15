@@ -7,7 +7,7 @@ const backButton = document.querySelector(".back");
 const numButtons = document.querySelectorAll(".digit");
 const operateButtons = document.querySelectorAll(".operation");
 let displayValue = "";
-let upperValue = "---";
+let upperValue = "";
 let num1;
 let num2;
 let operator;
@@ -28,7 +28,7 @@ const operate = function (operator, a, b) {
             return add(a, b);
         case "-":
             return subtract(a, b);
-        case "*":
+        case "x":
             return multiply(a, b);
         case "/":
             return divide(a, b);
@@ -50,7 +50,7 @@ const clearDisplay = function () {
 
 const reset = function () {
     displayValue = "0";
-    upperValue = "---";
+    upperValue = "";
     num1 = undefined;
     num2 = undefined;
     operator = undefined;
