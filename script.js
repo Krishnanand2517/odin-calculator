@@ -64,7 +64,7 @@ const reset = function () {
     chaining = false;
 
     updateDisplay();
-}
+};
 
 const appendNumber = function (value) {
     if (operationButtonPressed) {
@@ -78,7 +78,7 @@ const appendNumber = function (value) {
     displayValue += num;
 
     updateDisplay();
-}
+};
 
 const appendPointer = function () {
     if (!displayValue.includes(".")) {
@@ -92,6 +92,23 @@ const appendPointer = function () {
     updateDisplay();
 };
 
+const appendOperator = function (value) {
+    if (value == "*") value = "x";
+    
+    if (secondNumEntered) {
+        chaining = true;
+        giveResult();
+        secondNumEntered = false;
+    }
+
+    num1 = displayValue;
+    operator = value;
+
+    operationButtonPressed = true;
+    displayValue += "  " + operator;
+    updateDisplay();
+};
+
 const backspace = function () {
     displayValue = displayValue.toString();
     displayValue = displayValue.slice(0, displayValue.length - 1);
@@ -100,7 +117,7 @@ const backspace = function () {
     updateDisplay();
 };
 
-const giveResult = function (event) {
+const giveResult = function () {
     if (secondNumEntered) num2 = displayValue;
     
     if ((!num1 || !num2) && !chaining) {
@@ -137,6 +154,7 @@ const handleKeyboardInput = function (event) {
     else if (event.key == ".") appendPointer();
     else if (event.key == "Backspace") backspace();
     else if (event.key == "Control") reset();
+    else if (event.key == "+" || event.key == "-" || event.key == "*" || event.key == "/") appendOperator(event.key);
 
     updateDisplay();
 };
@@ -144,20 +162,7 @@ const handleKeyboardInput = function (event) {
 
 numButtons.forEach(btn => btn.addEventListener("click", event => appendNumber(event.target.textContent)));
 
-operateButtons.forEach(btn => btn.addEventListener("click", event => {
-    if (secondNumEntered) {
-        chaining = true;
-        giveResult(event);
-        secondNumEntered = false;
-    }
-
-    num1 = displayValue;
-    operator = event.target.textContent;
-
-    operationButtonPressed = true;
-    displayValue += "  " + operator;
-    updateDisplay();
-}));
+operateButtons.forEach(btn => btn.addEventListener("click", event => appendOperator(event.target.textContent)));
 
 equalButton.addEventListener("click", giveResult);
 
