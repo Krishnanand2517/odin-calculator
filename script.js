@@ -41,6 +41,7 @@ const operate = function (operator, a, b) {
     }
 };
 
+// Updates the display after every key pressed
 const updateDisplay = function () {
     if (displayValue == "") displayValue = "0";
 
@@ -48,7 +49,6 @@ const updateDisplay = function () {
     upperDisplay.textContent = upperValue;
 
     if (displayValue == "0") displayValue = "";
-    // displayValue = displayValue.toString();
 };
 
 const clearDisplay = function () {
@@ -56,6 +56,7 @@ const clearDisplay = function () {
     updateDisplay();
 };
 
+// Start again with an empty slate!
 const reset = function () {
     displayValue = "0";
     upperValue = "";
@@ -69,6 +70,7 @@ const reset = function () {
     updateDisplay();
 };
 
+// Enter a digit
 const appendNumber = function (value) {
     if (operationButtonPressed) {
         operationButtonPressed = false;
@@ -83,10 +85,10 @@ const appendNumber = function (value) {
     updateDisplay();
 };
 
+// Enter a decimal point
 const appendPointer = function () {
-    if (!displayValue.includes(".")) {
+    if (!displayValue.includes("."))
         pointPresent = false;
-    }
 
     if (pointPresent) return;
 
@@ -95,6 +97,7 @@ const appendPointer = function () {
     updateDisplay();
 };
 
+// Enter an operator sign
 const appendOperator = function (value) {
     if (operationButtonPressed) return;
     
@@ -114,14 +117,15 @@ const appendOperator = function (value) {
     updateDisplay();
 };
 
+// Remove one character from the display
 const backspace = function () {
     displayValue = displayValue.toString();
     displayValue = displayValue.slice(0, displayValue.length - 1);
     
-    // displayValue = parseFloat(displayValue);
     updateDisplay();
 };
 
+// Perform the calculation
 const giveResult = function () {
     if (secondNumEntered) num2 = displayValue;
     
@@ -139,12 +143,10 @@ const giveResult = function () {
         return;
     }
 
-    if (chaining) {
+    if (chaining)
         upperValue = displayValue;
-    }
-    else {
+    else
         upperValue += " " + num2 + " = ";
-    }
     
     num1 = undefined;
     num2 = undefined;
@@ -154,13 +156,25 @@ const giveResult = function () {
     updateDisplay();
 };
 
+// You can clearly see what this function does!
 const handleKeyboardInput = function (event) {
-    if (event.key >= "0" && event.key <= "9") appendNumber(event.key);
-    else if (event.key == ".") appendPointer();
-    else if (event.key == "Backspace") backspace();
-    else if (event.key == "Control") reset();
-    else if (event.key == "+" || event.key == "-" || event.key == "*" || event.key == "/") appendOperator(event.key);
-    else if (event.key == "Enter") giveResult();
+    if (event.key >= "0" && event.key <= "9")
+        appendNumber(event.key);
+
+    else if (event.key == ".")
+        appendPointer();
+
+    else if (event.key == "Backspace")
+        backspace();
+
+    else if (event.key == "Control")
+        reset();
+
+    else if (event.key == "+" || event.key == "-" || event.key == "*" || event.key == "/")
+        appendOperator(event.key);
+        
+    else if (event.key == "Enter")
+        giveResult();
 
     updateDisplay();
 };

@@ -14,7 +14,7 @@ button:hover {
 }
 
 .calculator-container {
-    background-color: lightseagreen;
+    background-color: #20b2aa;
     border: black solid 3px;
     border-radius: 10px;
     display: flex;
@@ -61,11 +61,11 @@ button:hover {
 }
 
 .clear {
-    background-color: rgb(255, 125, 103);
+    background-color: #ff7d67;
 }
 
 .back {
-    background-color: cornflowerblue;
+    background-color: #6495ed;
 }
 
 .key-btns {
@@ -94,7 +94,7 @@ button:hover {
 }
 
 .equal {
-    background-color: rgb(25, 227, 25);
+    background-color: #19e319;
 }
 
 .operation {
