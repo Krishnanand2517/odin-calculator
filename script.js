@@ -41,6 +41,8 @@ const operate = function (operator, a, b) {
 const updateDisplay = function () {
     calcDisplay.textContent = displayValue;
     upperDisplay.textContent = upperValue;
+    
+    if (displayValue == "0") displayValue = "";
 };
 
 const clearDisplay = function () {
